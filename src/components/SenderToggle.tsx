@@ -20,7 +20,6 @@ export default function SenderToggle({
       type="button"
     >
       <span aria-hidden="true">{isRobot ? '🤖' : '👤'}</span>
-      <span>{isRobot ? 'Robô' : 'Usuário'}</span>
     </button>
   )
 }
