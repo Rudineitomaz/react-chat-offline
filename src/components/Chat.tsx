@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
-import type { Message } from '../types/message'
+import type { Message, Sender } from '../types/message'
 
 export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([])
+  const [sender, setSender] = useState<Sender>('user')
 
   function handleSend(text: string) {
     if (!text.trim()) return
@@ -12,7 +13,7 @@ export default function Chat() {
     const message: Message = {
       id: crypto.randomUUID(),
       text,
-      sender: 'user',
+      sender,
     }
 
     setMessages((currentMessages) => [...currentMessages, message])
@@ -25,7 +26,15 @@ export default function Chat() {
         className="mx-auto flex h-dvh max-w-2xl flex-col bg-stone-50"
       >
         <MessageList messages={messages} />
-        <ChatInput onSend={handleSend} />
+        <ChatInput
+          onSend={handleSend}
+          onToggleSender={() =>
+            setSender((currentSender) =>
+              currentSender === 'user' ? 'robot' : 'user',
+            )
+          }
+          sender={sender}
+        />
       </section>
     </main>
   )

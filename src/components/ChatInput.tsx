@@ -1,12 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import SenderToggle from './SenderToggle'
+import type { Sender } from '../types/message'
 
 type ChatInputProps = {
   onSend: (text: string) => void
+  onToggleSender: () => void
+  sender: Sender
 }
 
 const MAX_TEXTAREA_HEIGHT = 144
 
-export default function ChatInput({ onSend }: ChatInputProps) {
+export default function ChatInput({
+  onSend,
+  onToggleSender,
+  sender,
+}: ChatInputProps) {
   const [text, setText] = useState('')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -39,10 +47,14 @@ export default function ChatInput({ onSend }: ChatInputProps) {
     <footer className="sticky bottom-0 bg-stone-50 p-4 pt-2">
       <form
         aria-label="Enviar mensagem"
-        className="flex items-end gap-3 rounded-lg border border-stone-300 bg-white p-3 shadow-sm"
+        className={`flex items-end gap-3 rounded-lg border bg-white p-3 shadow-sm transition-colors ${
+          sender === 'robot'
+            ? 'border-2 border-purple-500'
+            : 'border-stone-300'
+        }`}
         onSubmit={handleSubmit}
       >
-        <div aria-hidden="true" className="size-10 shrink-0" />
+        <SenderToggle onToggle={onToggleSender} sender={sender} />
         <textarea
           ref={textareaRef}
           aria-label="Mensagem"
