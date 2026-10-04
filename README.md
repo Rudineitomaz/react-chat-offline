@@ -1,32 +1,100 @@
-# React + TypeScript + Vite
+# React Chat Offline
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicação de chat em uma única janela, desenvolvida com React, TypeScript e Vite, com foco em um fluxo simples e responsivo de envio de mensagens entre dois remetentes: usuário e robô.
 
-Currently, two official plugins are available:
+## Visão geral
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O projeto simula um chat local sem backend ou persistência. O histórico de mensagens fica apenas em memória no estado do React, então todas as mensagens são perdidas ao recarregar a página. A interface é centralizada em um container responsivo e mantém o input fixo no rodapé do chat.
 
-## React Compiler
+## Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Toggle para escolher o remetente da próxima mensagem:
+  - usuário
+  - robô
+- Envio por botão ou com Enter no textarea
+- Shift + Enter para quebra de linha
+- Textarea multilinha com altura dinâmica
+- Botão de envio desabilitado quando o campo estiver vazio após trim
+- Lista de mensagens em ordem cronológica
+- Mensagens do usuário alinhadas à direita e do robô à esquerda
+- Estado vazio com mensagem indicativa quando não há conversa
+- Auto-scroll para a última mensagem enviada
+- Layout responsivo em tela cheia com fundo marrom claro
+- Borda roxa destacando o modo robô no input
 
-## Expanding the Oxlint configuration
+## Stack
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- React 19
+- TypeScript
+- Vite
+- Tailwind CSS
+- Oxlint
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+## Scripts
+
+```bash
+npm install
+npm run dev
+```
+
+### Outros comandos
+
+```bash
+npm run build
+npm run lint
+npm run preview
+```
+
+## Estrutura do projeto
+
+```text
+src/
+├── App.tsx
+├── index.css
+├── main.tsx
+├── components/
+│   ├── Chat.tsx
+│   ├── ChatInput.tsx
+│   ├── MessageBubble.tsx
+│   ├── MessageList.tsx
+│   └── SenderToggle.tsx
+├── types/
+│   └── message.ts
+└── assets/
+```
+
+## Modelo de dados
+
+```ts
+type Sender = 'user' | 'robot'
+
+type Message = {
+  id: string
+  text: string
+  sender: Sender
 }
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Regras de comportamento
+
+- O toggle afeta apenas a próxima mensagem enviada
+- Mensagens já criadas não mudam de remetente
+- O campo aceita texto em múltiplas linhas
+- A área de histórico cresce e mantém a última mensagem visível
+- Não há persistência em localStorage, banco ou backend
+
+## Como executar localmente
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
+2. Inicie o ambiente de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+3. Abra o endereço exibido no terminal no navegador.
+
+## Observações
+
+Este projeto foi pensado como uma implementação de chat offline de interface única, seguindo o PRD definido para uma aplicação leve, visualmente simples e funcional, sem armazenamento externo.
