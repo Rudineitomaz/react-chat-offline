@@ -393,9 +393,9 @@ sequenceDiagram
 ### Fase 4 — Mobile
 
 #### Tarefa 4.1 — Sidebar retrátil
-- [ ] Criar `MobileMenuButton.tsx` (hamburger)
-- [ ] Drawer overlay + backdrop no mobile
-- [ ] Fechar ao selecionar/criar conversa
+- [x] Criar `MobileMenuButton.tsx` (hamburger)
+- [x] Drawer overlay + backdrop no mobile
+- [x] Fechar ao selecionar/criar conversa
 - **Verificação:** sidebar oculto por padrão no mobile; abre/fecha corretamente
 
 ---
@@ -442,10 +442,10 @@ sequenceDiagram
 - [ ] Clique em conversa na lista a ativa e exibe seu histórico
 - [ ] Ícone excluir remove conversa; excluir a ativa volta ao empty state global
 - [x] Históricos isolados por conversa
-- [ ] Toggle usuário/robô global persiste ao trocar de conversa
+- [x] Toggle usuário/robô global persiste ao trocar de conversa
 - [x] Input desabilitado (50% opacidade) sem conversa ativa
-- [ ] Comportamento de envio, bolhas, auto-scroll e atalhos inalterados com conversa ativa
-- [ ] Mobile: hamburger abre/fecha sidebar; fecha ao selecionar ou criar conversa
-- [ ] Layout desktop: sidebar + área de chat centralizada `max-w-2xl`
+- [x] Comportamento de envio, bolhas, auto-scroll e atalhos inalterados com conversa ativa
+- [x] Mobile: hamburger abre/fecha sidebar; fecha ao selecionar ou criar conversa
+- [x] Layout desktop: sidebar + área de chat centralizada `max-w-2xl`
 - [ ] Dados perdidos ao recarregar a página
 - [ ] `npm run build` e `npm run lint` sem erros
