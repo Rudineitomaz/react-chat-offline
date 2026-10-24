@@ -52,7 +52,7 @@ export default function Sidebar({
       {onClose && (
         <button
           aria-label="Fechar menu lateral"
-          className={`fixed inset-0 z-30 bg-stone-950/30 transition-opacity duration-200 md:hidden ${
+          className={`fixed inset-0 z-30 bg-stone-950/30 transition-opacity duration-300 ease-in-out motion-reduce:transition-none md:hidden ${
             isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
           }`}
           onClick={onClose}
@@ -61,13 +61,25 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-72 shrink-0 flex-col border-r border-stone-200 bg-stone-100/90 backdrop-blur-sm transition-transform duration-200 md:static md:z-auto md:w-72 md:translate-x-0 md:border-r md:bg-stone-100/80 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-72 shrink-0 flex-col border-r border-stone-200 bg-stone-100/95 shadow-xl backdrop-blur-sm transition-transform duration-300 ease-in-out motion-reduce:transition-none md:static md:z-auto md:w-72 md:translate-x-0 md:border-r md:bg-stone-100/80 md:shadow-none ${
           isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
-        <div className="border-b border-stone-200 p-4">
+        <div className="space-y-3 border-b border-stone-200 p-5">
+          {isOpen && onClose && (
+            <div className="flex justify-end md:hidden">
+              <button
+                aria-label="Fechar menu lateral"
+                className="flex h-9 w-9 items-center justify-center rounded-md text-stone-600 transition-colors hover:bg-stone-200 hover:text-stone-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700"
+                onClick={onClose}
+                type="button"
+              >
+                <span aria-hidden="true">✕</span>
+              </button>
+            </div>
+          )}
           <button
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-stone-800 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-stone-700"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-stone-800 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-stone-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-700"
             onClick={handleCreateConversation}
             type="button"
           >
@@ -76,13 +88,13 @@ export default function Sidebar({
           </button>
         </div>
 
-        <nav aria-label="Conversas" className="flex-1 overflow-y-auto p-3">
+        <nav aria-label="Conversas" className="flex-1 overflow-y-auto p-4">
           {conversations.length === 0 ? (
-            <p className="px-2 pt-4 text-sm text-stone-500">
+            <p className="px-2 pt-3 text-sm leading-relaxed text-stone-500">
               Nenhuma conversa criada.
             </p>
           ) : (
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {conversations.map((conversation) => (
                 <SidebarItem
                   conversation={conversation}

@@ -55,20 +55,19 @@ export default function Chat() {
           />
 
           {activeConversation === undefined ? (
-            <div className="flex flex-1 items-center justify-center p-6 pt-16 text-center text-stone-600 md:pt-6">
+            <div className="flex min-h-0 flex-1 items-center justify-center p-6 text-center text-stone-600">
               Crie ou selecione uma conversa
             </div>
           ) : (
-            <>
-              <MessageList messages={activeConversation.messages} />
-              <ChatInput
-                disabled={disabled}
-                onSend={handleSend}
-                onToggleSender={toggleSender}
-                sender={sender}
-              />
-            </>
+            <MessageList messages={activeConversation.messages} />
           )}
+
+          <ChatInput
+            disabled={disabled}
+            onSend={handleSend}
+            onToggleSender={toggleSender}
+            sender={sender}
+          />
         </div>
       </section>
     </main>

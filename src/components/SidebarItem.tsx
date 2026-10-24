@@ -16,10 +16,11 @@ export default function SidebarItem({
   return (
     <li className="flex items-center gap-2">
       <button
-        className={`flex flex-1 items-center justify-between rounded-lg border px-3 py-2 text-left transition-colors ${
+        aria-current={isActive ? 'page' : undefined}
+        className={`flex min-w-0 flex-1 items-center rounded-lg border-l-4 px-3 py-2.5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 ${
           isActive
-            ? 'border-violet-300 bg-violet-50 text-violet-900 shadow-sm'
-            : 'border-stone-200 bg-white text-stone-700 hover:bg-stone-50'
+            ? 'border-l-violet-600 border-y-violet-200 border-r-violet-200 bg-violet-100 text-violet-950 shadow-sm'
+            : 'border-l-transparent border-y-stone-200 border-r-stone-200 bg-white text-stone-700 hover:border-l-stone-300 hover:bg-stone-50'
         }`}
         onClick={onSelect}
         type="button"
@@ -29,7 +30,7 @@ export default function SidebarItem({
 
       <button
         aria-label={`Excluir conversa ${conversation.id}`}
-        className="flex h-9 w-9 items-center justify-center rounded-md text-stone-500 transition-colors hover:bg-stone-200 hover:text-stone-700"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-stone-500 transition-colors hover:bg-red-100 hover:text-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
         onClick={(event) => {
           event.stopPropagation()
           onDelete()
