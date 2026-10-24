@@ -373,19 +373,19 @@ sequenceDiagram
 ### Fase 3 — Integração do chat
 
 #### Tarefa 3.1 — Migrar envio para a store
-- [ ] Remover `useState` de `Chat.tsx`
-- [ ] `MessageList` recebe mensagens da conversa ativa
-- [ ] `ChatInput` usa `sender` e `toggleSender` da store
+- [x] Remover `useState` de `Chat.tsx`
+- [x] `MessageList` recebe mensagens da conversa ativa
+- [x] `ChatInput` usa `sender` e `toggleSender` da store
 - **Verificação:** enviar mensagens em conversas distintas mantém históricos isolados
 
 #### Tarefa 3.2 — Empty states
-- [ ] Empty state global (sem conversa ativa)
-- [ ] Empty state por conversa (sem mensagens) — já existente, adaptar condição
+- [x] Empty state global (sem conversa ativa)
+- [x] Empty state por conversa (sem mensagens) — já existente, adaptar condição
 - **Verificação:** textos corretos em cada cenário
 
 #### Tarefa 3.3 — Input desabilitado
-- [ ] `ChatInput` aceita prop `disabled`
-- [ ] Aplicar opacidade 50% e bloquear interações quando `activeConversationId === null`
+- [x] `ChatInput` aceita prop `disabled`
+- [x] Aplicar opacidade 50% e bloquear interações quando `activeConversationId === null`
 - **Verificação:** input inativo ao abrir o app; ativo após criar/selecionar conversa
 
 ---
@@ -441,9 +441,9 @@ sequenceDiagram
 - [ ] Botão criar conversa: gera UUID, adiciona à lista, seleciona automaticamente
 - [ ] Clique em conversa na lista a ativa e exibe seu histórico
 - [ ] Ícone excluir remove conversa; excluir a ativa volta ao empty state global
-- [ ] Históricos isolados por conversa
+- [x] Históricos isolados por conversa
 - [ ] Toggle usuário/robô global persiste ao trocar de conversa
-- [ ] Input desabilitado (50% opacidade) sem conversa ativa
+- [x] Input desabilitado (50% opacidade) sem conversa ativa
 - [ ] Comportamento de envio, bolhas, auto-scroll e atalhos inalterados com conversa ativa
 - [ ] Mobile: hamburger abre/fecha sidebar; fecha ao selecionar ou criar conversa
 - [ ] Layout desktop: sidebar + área de chat centralizada `max-w-2xl`
