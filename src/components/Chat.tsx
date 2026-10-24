@@ -1,40 +1,74 @@
 import { useState } from 'react'
-import MessageList from './MessageList'
+import { useChatStore } from '../stores/chatStore'
 import ChatInput from './ChatInput'
-import type { Message, Sender } from '../types/message'
+import MessageList from './MessageList'
+import MobileMenuButton from './MobileMenuButton'
+import Sidebar from './Sidebar'
 
 export default function Chat() {
-  const [messages, setMessages] = useState<Message[]>([])
-  const [sender, setSender] = useState<Sender>('user')
+  const [isSidebarOpen, setSidebarOpen] = useState(false)
+
+  const activeConversationId = useChatStore((state) => state.activeConversationId)
+  const activeConversation = useChatStore((state) =>
+    state.conversations.find(
+      (conversation) => conversation.id === state.activeConversationId,
+    ),
+  )
+  const sender = useChatStore((state) => state.sender)
+  const toggleSender = useChatStore((state) => state.toggleSender)
+  const addMessage = useChatStore((state) => state.addMessage)
+  const createConversation = useChatStore((state) => state.createConversation)
+  const selectConversation = useChatStore((state) => state.selectConversation)
+  const disabled = activeConversationId === null
 
   function handleSend(text: string) {
-    if (!text.trim()) return
+    addMessage(text)
+  }
 
-    const message: Message = {
-      id: crypto.randomUUID(),
-      text,
-      sender,
-    }
+  function handleCreateConversation() {
+    createConversation()
+    setSidebarOpen(false)
+  }
 
-    setMessages((currentMessages) => [...currentMessages, message])
+  function handleSelectConversation(id: string) {
+    selectConversation(id)
+    setSidebarOpen(false)
   }
 
   return (
-    <main className="min-h-dvh bg-stone-200 px-4">
+    <main className="min-h-dvh bg-stone-200 px-0">
       <section
         aria-label="Chat"
-        className="mx-auto flex h-dvh max-w-2xl flex-col bg-stone-50"
+        className="relative flex h-dvh w-full overflow-hidden bg-stone-50 shadow-sm"
       >
-        <MessageList messages={messages} />
-        <ChatInput
-          onSend={handleSend}
-          onToggleSender={() =>
-            setSender((currentSender) =>
-              currentSender === 'user' ? 'robot' : 'user',
-            )
-          }
-          sender={sender}
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          onCreateConversation={handleCreateConversation}
+          onSelectConversation={handleSelectConversation}
         />
+
+        <div className="relative flex min-w-0 flex-1 flex-col pt-14 md:pt-0">
+          <MobileMenuButton
+            isOpen={isSidebarOpen}
+            onToggle={() => setSidebarOpen((prev) => !prev)}
+          />
+
+          {activeConversation === undefined ? (
+            <div className="flex min-h-0 flex-1 items-center justify-center p-6 text-center text-stone-600">
+              Crie ou selecione uma conversa
+            </div>
+          ) : (
+            <MessageList messages={activeConversation.messages} />
+          )}
+
+          <ChatInput
+            disabled={disabled}
+            onSend={handleSend}
+            onToggleSender={toggleSender}
+            sender={sender}
+          />
+        </div>
       </section>
     </main>
   )
