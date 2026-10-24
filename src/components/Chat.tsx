@@ -36,10 +36,10 @@ export default function Chat() {
   }
 
   return (
-    <main className="min-h-dvh bg-stone-200 px-0 sm:px-4">
+    <main className="min-h-dvh bg-stone-200 px-0">
       <section
         aria-label="Chat"
-        className="relative mx-auto flex h-dvh w-full max-w-6xl overflow-hidden bg-stone-50 shadow-sm"
+        className="relative flex h-dvh w-full overflow-hidden bg-stone-50 shadow-sm"
       >
         <Sidebar
           isOpen={isSidebarOpen}
